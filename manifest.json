@@ -1,0 +1,40 @@
+{
+
+  "description": "Altering HTTP responses",
+  "manifest_version": 2,
+  "name": "View Image (Google) Resurrected",
+  "version": "1.0",
+  "permissions": [
+    "webRequest",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.co.uk/*",
+        "*://*.google.com/*",
+        "*://*.google.ca/*",
+        "*://*.google.de/*",
+        "*://*.google.fr/*",
+        "*://*.google.it/*",
+        "*://*.google.es/*",
+        "*://*.google.com.au/*",
+        "*://*.google.ru/*",
+        "*://*.google.com.br/*",
+        "*://*.google.com.in/*"
+      ],
+      "js": ["jquery.min.js", "content-script.js"]
+    }
+  ],
+
+  "applications": {
+    "gecko": {
+      "strict_min_version": "54.0a1"
+    }
+  }
+
+}
