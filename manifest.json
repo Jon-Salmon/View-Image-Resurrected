@@ -3,14 +3,14 @@
   "description": "Brings back the old 'View Image' button on google image search results.",
   "manifest_version": 2,
   "name": "View Image Resurrected",
-  "version": "1.0",
+  "version": "1.2",
   "permissions": [
     "webRequest",
     "<all_urls>"
   ],
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["js/background.js"]
   },
   "content_scripts": [
     {
@@ -213,7 +213,7 @@
         "*://*.google.co.zm/*",
         "*://*.google.co.zw/*"
       ],
-      "js": ["jquery.min.js", "content-script.js"]
+      "js": ["js/content-script.js"]
     }
   ]
 
