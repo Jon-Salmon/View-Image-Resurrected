@@ -20,7 +20,7 @@ function renderUI() {
 
   // Search by Image
   var pages = document.body.querySelectorAll("div.irc_mmc .irc_hd ._r3");
-  template.innerHTML = '<span class="_r3"><a class="customImageSearch _ZR">Seach by Image</a></span>';
+  template.innerHTML = '<span class="_r3"><a class="customImageSearch">Seach by Image</a></span>';
   var searchImg = template.content.firstChild;
 
   for (var i = 0; i < pages.length; i++) {

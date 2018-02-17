@@ -18,6 +18,7 @@
   },
   "content_scripts": [
     {
+      "run_at": "document_end",
       "matches": [
         "*://*.google.co.uk/*",
         "*://*.google.com/*",
