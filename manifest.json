@@ -16,9 +16,14 @@
   "background": {
     "scripts": ["js/background.js"]
   },
+  "web_accessible_resources": [
+    "icons/icon-96.png"
+  ],
   "content_scripts": [
     {
       "run_at": "document_end",
+      "js": ["js/content-script.js"],
+      "css": ["css/settings.css"],
       "matches": [
         "*://*.google.co.uk/*",
         "*://*.google.com/*",
@@ -217,8 +222,7 @@
         "*://*.google.co.za/*",
         "*://*.google.co.zm/*",
         "*://*.google.co.zw/*"
-      ],
-      "js": ["js/content-script.js"]
+      ]
     }
   ]
 
