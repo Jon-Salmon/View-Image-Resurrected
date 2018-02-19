@@ -23,11 +23,31 @@ function renderUI() {
     // View image button
     var pages = document.body.querySelectorAll("table._FKw.irc_but_r tbody tr");
     template.innerHTML = `<td class="customOpenImage">
-    <a ` + (settings.newTab ? 'target="_blank"' : '') + `>
-      <span>View Image</span>
-    </a></td>`;
+    <div class="customTopElement">
+      <a class="virLink" ` + (settings.newTab ? 'target="_blank"' : '') + `>
+        <span>View Image</span>
+      </a>
+      <a class="virDropDown virDropdownClick">
+        <span class="_RKw _wtf _Rtf virDropdownClick">
+          <svg class="virDropdownClick" xmlns="http://www.w3.org/2000/svg" width="14" height="14" style="vertical-align: middle;align-content: center;" viewBox="0 0 18 18">
+            <path class="virDropdownClick" d="M5 8l4 4 4-4z"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <div id="myDropdown" class="dropdown-content">
+      <a class="virCopyImage" >Copy Image</a>
+      <a class="virSaveImage" >Save Image</a>
+    </div>
+    </td>`;
 
     var viewBtn = template.content.firstChild;
+
+
+
+
+
+
 
     // Settings btn
     settingsTemplate.innerHTML = `<td class="customSettingsBtn"> <a>
@@ -37,14 +57,42 @@ function renderUI() {
   </a></td>`;
     var settingsBtn = settingsTemplate.content.firstChild;
 
+
+
+
+
+
     for (var i = 0; i < pages.length; i++) {
       pages[i].insertBefore(document.importNode(viewBtn, true), pages[i].firstChild);
       pages[i].appendChild(document.importNode(settingsBtn, true));
     }
+
+
+    // Dropdown
+    document.querySelectorAll('.virDropDown').forEach(x => x.addEventListener("click", function(e) {
+      e.preventDefault();
+      document.querySelectorAll('#myDropdown').forEach(x => x.classList.toggle("show"));
+
+      // Close the dropdown menu if the user clicks outside of it
+      window.addEventListener('click', clearDropDown); // add the listener
+    }));
+
+
+    // Save Image
+    document.querySelectorAll('.virSaveImage').forEach(x => x.addEventListener("click", function(e) {
+      chrome.runtime.sendMessage({
+        request: "download",
+        url: lastUrl
+      });
+
+    }));
+
     document.querySelectorAll('.customSettingsBtn a').forEach(x => x.addEventListener("click", function(e) {
       SettingsOpen();
       e.preventDefault();
     }));
+
+
 
     // Search by Image
     var pages = document.body.querySelectorAll("div.irc_mmc .irc_hd ._r3");
@@ -130,6 +178,22 @@ function SettingsOpen() {
 
 
 
+// Dropdown methods
+function clearDropDown(event) {
+  console.log(event)
+  if (!event.target.matches('.virDropdownClick')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+    window.removeEventListener('click', clearDropDown); // add the listener
+  }
+}
 
 
 // Settings methods
@@ -172,6 +236,7 @@ var domChanged = function(mutationsList) {
 // Updates button href when event detected by background script
 chrome.runtime.onMessage.addListener(function(url) {
   // Catch incase UI not rendered
+
   if (!rendered) {
     renderUI();
   }
@@ -180,7 +245,7 @@ chrome.runtime.onMessage.addListener(function(url) {
 });
 
 function updateLinks(url) {
-  document.querySelectorAll('.customOpenImage a').forEach(x => x.setAttribute("href", url));
+  document.querySelectorAll('.customOpenImage a.virLink').forEach(x => x.setAttribute("href", url));
   document.querySelectorAll('.customImageSearch a').forEach(x => x.setAttribute("href", "/searchbyimage?image_url=" + url));
 }
 
