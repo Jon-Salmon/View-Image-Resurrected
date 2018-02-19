@@ -18,3 +18,12 @@ chrome.webRequest.onBeforeRequest.addListener(
     urls: ["*://*/async/imgrc*"]
   }
 );
+
+chrome.runtime.onMessage.addListener(
+  function(args, sender, sendResponse) {
+    if (args.request == "download") {
+      chrome.downloads.download({
+        url: args.url
+      });
+    }
+  });
