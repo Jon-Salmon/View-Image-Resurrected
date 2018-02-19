@@ -36,8 +36,8 @@ function renderUI() {
       </a>
     </div>
     <div id="myDropdown" class="dropdown-content">
-      <a class="virCopyImage" >Copy Image</a>
-      <a class="virSaveImage" >Save Image</a>
+      <a class="virCopyImage" ><span>Copy Image</span></a>
+      <a class="virSaveImage" ><span>Download</span></a>
     </div>
     </td>`;
 
@@ -64,7 +64,7 @@ function renderUI() {
 
     for (var i = 0; i < pages.length; i++) {
       pages[i].insertBefore(document.importNode(viewBtn, true), pages[i].firstChild);
-      pages[i].appendChild(document.importNode(settingsBtn, true));
+      // pages[i].appendChild(document.importNode(settingsBtn, true));
     }
 
 
@@ -78,13 +78,31 @@ function renderUI() {
     }));
 
 
+    // Copy Image
+    document.querySelectorAll('.virCopyImage').forEach(x => x.addEventListener("click", function(e) {
+
+      // Find element
+      var root = e.target.closest('div.irc_c');
+      var img = root.querySelector('img.irc_mi');
+      var range = document.createRange();
+      range.selectNode(img);
+      window.getSelection().addRange(range);
+      try {
+        // Now that we've selected the anchor text, execute the copy command
+        document.execCommand('copy');
+      } catch (err) {
+        console.log('Oops, unable to copy');
+      }
+
+      window.getSelection().removeRange(range);
+    }));
+
     // Save Image
     document.querySelectorAll('.virSaveImage').forEach(x => x.addEventListener("click", function(e) {
       chrome.runtime.sendMessage({
         request: "download",
         url: lastUrl
       });
-
     }));
 
     document.querySelectorAll('.customSettingsBtn a').forEach(x => x.addEventListener("click", function(e) {
@@ -121,7 +139,6 @@ function SettingsOpen() {
       }, settings);
 
       settingsRendered = true;
-      console.log(settings);
 
 
       document.body.insertAdjacentHTML('beforeend', `
@@ -180,7 +197,6 @@ function SettingsOpen() {
 
 // Dropdown methods
 function clearDropDown(event) {
-  console.log(event)
   if (!event.target.matches('.virDropdownClick')) {
 
     var dropdowns = document.getElementsByClassName("dropdown-content");
