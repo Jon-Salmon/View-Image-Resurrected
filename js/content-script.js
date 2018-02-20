@@ -1,6 +1,12 @@
 var rendered = false;
 var lastUrl = "";
 var settingsRendered = false;
+var defaultSettings = {
+  newTab: true,
+  openVisible: true,
+  primary: "view",
+  placement: "default"
+}
 var config = {
   attributes: true,
   childList: true
@@ -12,21 +18,45 @@ function renderUI() {
   rendered = true;
 
   chrome.storage.local.get(null, function(settings) {
-    settings = Object.assign({
-      newTab: true,
-      openVisible: true
-    }, settings);
+    settings = Object.assign(defaultSettings, settings);
 
     var template = document.createElement('template');
     var settingsTemplate = document.createElement('template');
 
+
     // View image button
+    var view = `<a class="virLink" ` + (settings.newTab ? 'target="_blank"' : '') + `>
+        <span>View Image</span>
+      </a>`;
+    var copy = `<a class="virCopyImage" ><span>Copy Image</span></a>`;
+    var save = `<a class="virSaveImage" ><span>Download</span></a>`;
+    var primary = '';
+    var sec1 = '';
+    var sec2 = '';
+
+    switch (settings.primary) {
+      case "view":
+      default:
+        primary = view;
+        sec1 = copy;
+        sec2 = save;
+        break;
+      case "copy":
+        primary = copy;
+        sec1 = view;
+        sec2 = save;
+        break;
+      case "save":
+        primary = save;
+        sec1 = view;
+        sec2 = copy;
+        break;
+    }
+
     var pages = document.body.querySelectorAll("table._FKw.irc_but_r tbody tr");
     template.innerHTML = `<td class="customOpenImage">
     <div class="customTopElement">
-      <a class="virLink" ` + (settings.newTab ? 'target="_blank"' : '') + `>
-        <span>View Image</span>
-      </a>
+    ` + primary + `
       <a class="virDropDown virDropdownClick">
         <span class="_RKw _wtf _Rtf virDropdownClick">
           <svg class="virDropdownClick" xmlns="http://www.w3.org/2000/svg" width="14" height="14" style="vertical-align: middle;align-content: center;" viewBox="0 0 18 18">
@@ -36,8 +66,7 @@ function renderUI() {
       </a>
     </div>
     <div id="myDropdown" class="dropdown-content">
-      <a class="virCopyImage" ><span>Copy Image</span></a>
-      <a class="virSaveImage" ><span>Download</span></a>
+    ` + sec1 + sec2 + `
     </div>
     </td>`;
 
@@ -63,8 +92,12 @@ function renderUI() {
 
 
     for (var i = 0; i < pages.length; i++) {
-      pages[i].insertBefore(document.importNode(viewBtn, true), pages[i].firstChild);
-      // pages[i].appendChild(document.importNode(settingsBtn, true));
+      pages[i].appendChild(document.importNode(settingsBtn, true));
+      if (settings.placement == "default") {
+        pages[i].insertBefore(document.importNode(viewBtn, true), pages[i].firstChild);
+      } else {
+        pages[i].insertBefore(document.importNode(viewBtn, true), pages[i].childNodes[1]);
+      }
     }
 
 
@@ -115,7 +148,7 @@ function renderUI() {
     // Search by Image
     var pages = document.body.querySelectorAll("div.irc_mmc .irc_hd ._r3");
     template.innerHTML = `<span class="_r3 customImageSearch">
-    <a>Seach by Image</a>
+    <a class="_ZR">Seach by Image</a>
   </span>`;
 
     var searchImg = template.content.firstChild;
@@ -133,10 +166,7 @@ function SettingsOpen() {
   if (!settingsRendered) {
 
     chrome.storage.local.get(null, function(settings) {
-      settings = Object.assign({
-        newTab: true,
-        openVisible: true
-      }, settings);
+      settings = Object.assign(defaultSettings, settings);
 
       settingsRendered = true;
 
@@ -151,10 +181,32 @@ function SettingsOpen() {
           </div>
           <div id="modalBody">
             <div>
-              <div>
-                <input id="cSettingsNewTab" name="newTab" type="checkbox" ` + (settings.newTab ? 'checked' : '') + `>Open Images in new tab</input>
-                <label for="cSettingsNewTab">Coding</label>
+              <div class="settingItem">
+                <h3>Primary option</h3>
+                <input type="radio" id="virPrimaryView" name="primary" value="view" ` + (settings.primary == "view" ? "checked" : "") + `>
+                <label for="virPrimaryView">View Image</label><br>
+
+                <input type="radio" id="virPrimaryCopy" name="primary" value="copy" ` + (settings.primary == "copy" ? "checked" : "") + `>
+                <label for="virPrimaryCopy">Copy Image</label><br>
+
+                <input type="radio" id="virPrimarySave" name="primary" value="save" ` + (settings.primary == "save" ? "checked" : "") + `>
+                <label for="virPrimarySave">Download Image</label>
               </div>
+
+              <div class="settingItem">
+                <h3>Button placement</h3>
+                <input type="radio" id="virPlacementDefault" name="placement" value="default" ` + (settings.placement == "default" ? "checked" : "") + `>
+                <label for="virPlacementDefault">Recommended Default</label><br>
+
+                <input type="radio" id="virPlacementTraditional" name="placement" value="traditional" ` + (settings.placement == "traditional" ? "checked" : "") + `>
+                <label for="virPlacementTraditional">Google's Original</label>
+              </div>
+
+              <div class="settingItem">
+                <h3>Advanced option</h3>
+                <input id="cSettingsNewTab" name="newTab" type="checkbox" ` + (settings.newTab ? 'checked' : '') + `>'View Image' opens in new tab</input>
+              </div>
+
             </div>
           </div>
         </div>
@@ -222,13 +274,20 @@ function settingsChanged(event) {
     }, function() {
       refreshUI();
     });
+  } else if (event.target.type == "radio") {
+    var name = event.target.name;
+    chrome.storage.local.set({
+      [name]: event.target.value
+    }, function() {
+      refreshUI();
+    });
   }
 }
 
 function refreshUI() {
-  document.querySelectorAll('.customOpenImage').forEach(x => x.style.display = 'none');
-  document.querySelectorAll('.customImageSearch').forEach(x => x.style.display = 'none');
-  document.querySelectorAll('.customSettingsBtn').forEach(x => x.style.display = 'none');
+  document.querySelectorAll('.customOpenImage').forEach(x => x.parentNode.removeChild(x));
+  document.querySelectorAll('.customImageSearch').forEach(x => x.parentNode.removeChild(x));
+  document.querySelectorAll('.customSettingsBtn').forEach(x => x.parentNode.removeChild(x));
   renderUI();
 }
 

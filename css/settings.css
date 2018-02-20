@@ -43,6 +43,7 @@
   top: 10px;
   margin: 0 30px 0 30px;
   text-align: center;
+  font-size: 24px;
 }
 
 .modal-content #modalHeader img {
@@ -52,12 +53,22 @@
 }
 
 .modal-content #modalBody {
-  padding-top: 20px;
+  padding-top: 4px;
   text-align: center;
+}
+
+.modal-content #modalBody h3 {
+  padding: 8px 0 4px 0;
+  font-weight: bold;
 }
 
 .modal-content #modalBody div {
   display: inline-block;
+  text-align: left;
+}
+
+.modal-content #modalBody div.settingItem {
+  display: block;
 }
 
 /* The Close Button */
