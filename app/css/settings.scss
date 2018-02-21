@@ -19,8 +19,8 @@
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
-  transition: opacity 0.3s linear, visibility 0.3s linear 0s; /* Modal Content/Box */
-
+  transition: opacity 0.3s linear, visibility 0.3s linear 0s;
+  /* Modal Content/Box */
   .modal-content {
     background-color: #fefefe;
     margin: 15% auto;

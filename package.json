@@ -1,10 +1,13 @@
 {
   "name": "view-image-resurrected",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "![Icon](icons/icon-96.png)\r # View Image Resurrected",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "gulp build",
+    "build": "gulp build && cd build && web-ext build",
+    "firefox": "concurrently --kill-others \"gulp default\" \"cd build && web-ext run\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,7 @@
   },
   "homepage": "https://github.com/Jon-Salmon/View-Image-Resurrected#readme",
   "devDependencies": {
+    "concurrently": "^3.5.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.1.0"
