@@ -1,4 +1,4 @@
-![Icon](icons/icon-96.png)
+![Icon](app/icons/icon-96.png)
 # View Image Resurrected
 
  A firefox addon to back the old 'View Image' and 'Search by Image' button in google image search results.
