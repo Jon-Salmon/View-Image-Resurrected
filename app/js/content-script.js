@@ -7,10 +7,6 @@ var defaultSettings = {
   primary: "view",
   placement: "default"
 }
-var config = {
-  attributes: true,
-  childList: true
-};
 
 // Renderers
 

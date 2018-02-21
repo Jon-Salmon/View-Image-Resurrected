@@ -1,0 +1,88 @@
+.customOpenImage {
+  position: relative;
+}
+
+.customTopElement {
+  background-color: #454545;
+  background-image: linear-gradient(top, #3e3e3e, #333);
+  border: 1px solid #141414;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .06), 1px 1px 0 rgba(255, 255, 255, .03), -1px -1px 0 rgba(0, 0, 0, .02), inset 1px 1px 0 rgba(255, 255, 255, .05);
+  color: #aaa;
+  cursor: pointer;
+  display: inline-table;
+  height: 100%;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 10px;
+  outline: 0;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+  vertical-align: middle;
+  white-space: normal;
+  word-wrap: normal;
+
+  &:hover {
+    border: 1px solid #191919;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .09), 1px 1px 0 rgba(255, 255, 255, .05), -1px -1px 0 rgba(0, 0, 0, .02), inset 1px 1px 0 rgba(255, 255, 255, .05);
+  }
+
+  a {
+    box-shadow: unset !important;
+    padding: 5px 0 5px 8px !important;
+    margin: 0 !important;
+    border: 0 !important;
+
+    &:hover {
+      box-shadow: unset !important;
+      border: 0 !important;
+    }
+  }
+}
+
+a.virDropDown {
+  padding: 5px 4px 5px 0 !important;
+}
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+  width: 100%;
+  min-width: 0;
+  margin: 0 1px;
+  /* Links inside the dropdown */
+  a {
+    text-decoration: none !important;
+    display: block !important;
+    margin: 0 12px 0 0 !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-color: #333 !important;
+    box-shadow: unset !important;
+    border-radius: 0 !important;
+
+    &:last-child {
+      border-radius: 0 0 2px 2px !important;
+      border: 0 !important;
+    }
+
+    &:hover {
+      box-shadow: unset !important;
+      border-top: 0 !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+      border-color: #333 !important;
+    }
+  }
+}
+/* Change color of dropdown links on hover */
+
+.show {
+  display: block;
+}
