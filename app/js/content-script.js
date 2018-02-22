@@ -134,6 +134,7 @@ function renderUI() {
       });
     }));
 
+    // Open settings
     document.querySelectorAll('.customSettingsBtn a').forEach(x => x.addEventListener("click", function(e) {
       SettingsOpen();
       e.preventDefault();
@@ -143,15 +144,25 @@ function renderUI() {
 
     // Search by Image
     var pages = document.body.querySelectorAll("div.irc_mmc .irc_hd ._r3");
-    template.innerHTML = `<span class="_r3 customImageSearch">
-    <a class="_ZR">Seach by Image</a>
-  </span>`;
+    template.innerHTML = `<span class="_r3 virAllSizes">
+      <a class="_ZR" href="#">All Sizes</a>
+    </span>
+    <span class="_r3 customImageSearch">
+      <a class="_ZR">Seach by Image</a>
+    </span>`;
 
-    var searchImg = template.content.firstChild;
+    var searchImg = template.content.childNodes;
 
-    for (var i = 0; i < pages.length; i++) {
-      pages[i].appendChild(document.importNode(searchImg, true));
+    for (var j = 0; j < searchImg.length; j++) {
+      for (var i = 0; i < pages.length; i++) {
+        pages[i].appendChild(document.importNode(searchImg[j], true));
+      }
     }
+
+    document.querySelectorAll('.virAllSizes a').forEach(x => x.addEventListener("click", function(e) {
+      openAllSizes();
+      e.preventDefault();
+    }));
 
     updateLinks(lastUrl);
   });
@@ -287,6 +298,17 @@ function refreshUI() {
   renderUI();
 }
 
+function openAllSizes(url) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      let id = xmlHttp.responseText.match(/simg:([^&]+)/)[1];
+      window.location.href = '/search?tbm=isch&tbs=simg:' + id;
+    }
+  };
+  xmlHttp.open("GET", window.location.protocol + "//" + window.location.host + "/searchbyimage?image_url=" + lastUrl, true); // true for asynchronous
+  xmlHttp.send(null);
+}
 
 
 
