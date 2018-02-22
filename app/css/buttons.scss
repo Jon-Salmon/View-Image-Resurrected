@@ -23,6 +23,7 @@
   vertical-align: middle;
   white-space: normal;
   word-wrap: normal;
+  min-width: 96px;
 
   &:hover {
     border: 1px solid #191919;
@@ -46,7 +47,6 @@ a.virDropDown {
   padding: 5px 4px 5px 0 !important;
 }
 /* Dropdown Content (Hidden by Default) */
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -82,7 +82,6 @@ a.virDropDown {
   }
 }
 /* Change color of dropdown links on hover */
-
 .show {
   display: block;
 }
