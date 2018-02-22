@@ -301,8 +301,9 @@ function settingsChanged(event) {
 
 function refreshUI() {
   document.querySelectorAll('.customOpenImage').forEach(x => x.parentNode.removeChild(x));
-  document.querySelectorAll('.customImageSearch').forEach(x => x.parentNode.removeChild(x));
   document.querySelectorAll('.customSettingsBtn').forEach(x => x.parentNode.removeChild(x));
+  document.querySelectorAll('.customImageSearch').forEach(x => x.parentNode.removeChild(x));
+  document.querySelectorAll('.virAllSizes').forEach(x => x.parentNode.removeChild(x));
   renderUI();
 }
 
