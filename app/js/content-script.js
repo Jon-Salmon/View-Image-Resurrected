@@ -1,6 +1,7 @@
 var rendered = false;
 var lastUrl = "";
 var settingsRendered = false;
+var abortLink = false;
 var defaultSettings = {
   newTab: true,
   openVisible: true,
@@ -160,8 +161,15 @@ function renderUI() {
     }
 
     document.querySelectorAll('.virAllSizes a').forEach(x => x.addEventListener("click", function(e) {
-      openAllSizes();
       e.preventDefault();
+      if (e.ctrlKey ||
+        e.shiftKey ||
+        e.metaKey || // apple
+        (e.button && e.button == 1)) {
+        openAllSizes(true);
+      } else {
+        openAllSizes(false);
+      }
     }));
 
     updateLinks(lastUrl);
@@ -298,16 +306,54 @@ function refreshUI() {
   renderUI();
 }
 
-function openAllSizes(url) {
+function openAllSizes(newTab) {
+  abortLink = false;
+  startLoad();
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      // get image id
       let id = xmlHttp.responseText.match(/simg:([^&]+)/)[1];
-      window.location.href = '/search?tbm=isch&tbs=simg:' + id;
+
+      // check if aborted
+      console.log(abortLink);
+      if (abortLink) {
+        return;
+      }
+
+      // open link
+      if (newTab) {
+        window.open('/search?tbm=isch&tbs=simg:' + id, '_blank');
+      } else {
+        window.location.href = '/search?tbm=isch&tbs=simg:' + id;
+      }
+      endLoad();
     }
   };
   xmlHttp.open("GET", window.location.protocol + "//" + window.location.host + "/searchbyimage?image_url=" + lastUrl, true); // true for asynchronous
   xmlHttp.send(null);
+}
+
+function startLoad() {
+  document.body.insertAdjacentHTML('beforeend', `<div id="loadingOverlay" class="loading"></div>`);
+
+  var modal = document.getElementById('loadingOverlay');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      abortLink = true;
+      endLoad();
+    }
+  }
+
+  document.getElementById('loadingOverlay').style.opacity = 1;
+  document.getElementById('loadingOverlay').style.visibility = "visible";
+}
+
+function endLoad() {
+  var overlay = document.querySelector('#loadingOverlay');
+  overlay.parentNode.removeChild(overlay);
 }
 
 
