@@ -3,16 +3,23 @@
   "description": "Brings back the 'View Image' and 'Search by Image' options in google image search results, as well as adding copy and download options.",
   "manifest_version": 2,
   "name": "View Image Resurrected",
-  "version": "1.7.1",
+  "version": "1.8.1",
   "permissions": [
     "webRequest",
     "<all_urls>",
     "storage",
-    "downloads"
+    "downloads",
+    "clipboardWrite",
+    "notifications"
   ],
   "icons": {
     "48": "icons/icon-48.png",
     "96": "icons/icon-96.png"
+  },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "57.0a1"
+    }
   },
 
   "background": {
