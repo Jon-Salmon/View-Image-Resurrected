@@ -111,20 +111,24 @@ function renderUI() {
     // Copy Image
     document.querySelectorAll('.virCopyImage').forEach(x => x.addEventListener("click", function(e) {
 
-      // Find element
-      var root = e.target.closest('div.irc_c');
-      var img = root.querySelector('img.irc_mi');
-      var range = document.createRange();
-      range.selectNode(img);
-      window.getSelection().addRange(range);
-      try {
-        // Now that we've selected the anchor text, execute the copy command
-        document.execCommand('copy');
-      } catch (err) {
-        console.log('Oops, unable to copy');
-      }
-
-      window.getSelection().removeRange(range);
+      // // Find element
+      // var root = e.target.closest('div.irc_c');
+      // var img = root.querySelector('img.irc_mi');
+      // var range = document.createRange();
+      // range.selectNode(img);
+      // window.getSelection().addRange(range);
+      // try {
+      //   // Now that we've selected the anchor text, execute the copy command
+      //   document.execCommand('copy');
+      // } catch (err) {
+      //   console.log('Oops, unable to copy');
+      // }
+      //
+      // window.getSelection().removeRange(range);
+      chrome.runtime.sendMessage({
+        request: "copy",
+        url: lastUrl
+      });
     }));
 
     // Save Image

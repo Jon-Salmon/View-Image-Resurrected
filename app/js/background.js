@@ -25,5 +25,31 @@ chrome.runtime.onMessage.addListener(
       chrome.downloads.download({
         url: args.url
       });
-    }
+    } else if (args.request == "copy") {
+      fetch(args.url).then(function(response) {
+        response.blob().then(function(x) {
+          var type = '';
+          switch (x.type) {
+            case 'image/jpeg':
+              type = 'jpeg';
+              break;
+            case 'image/png':
+              type = 'png';
+              break;
+            default:
+              browser.notifications.create({
+                "type": "basic",
+                "title": "Copy Failed",
+                "message": "Copying " + x.type + " files are unsupported. \nDownload or use the right click context menu."
+              });
+              return;
+          }
+
+          fetch(args.url)
+            .then(response => response.arrayBuffer())
+            .then(buffer => browser.clipboard.setImageData(buffer, type));
+
+        });
+      });
+    };
   });
