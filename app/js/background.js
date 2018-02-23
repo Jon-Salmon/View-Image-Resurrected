@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener(
               browser.notifications.create({
                 "type": "basic",
                 "title": "Copy Failed",
-                "message": "Copying " + x.type + " files are unsupported. \nDownload or use the right click context menu."
+                "message": "Copying " + x.type.split('/')[1] + " images are not supported. \nDownload or use the right click context menu."
               });
               return;
           }
@@ -53,3 +53,10 @@ chrome.runtime.onMessage.addListener(
       });
     };
   });
+
+// Save browser version in settings
+browser.runtime.getBrowserInfo().then(function(info, e) {
+  chrome.storage.local.set({
+    copySupported: info.version.split('.')[0] >= 57
+  });
+});

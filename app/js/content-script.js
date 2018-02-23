@@ -6,7 +6,8 @@ var defaultSettings = {
   newTab: true,
   openVisible: true,
   primary: "view",
-  placement: "default"
+  placement: "default",
+  copySupported: false
 }
 
 // Renderers
@@ -17,6 +18,7 @@ function renderUI() {
   chrome.storage.local.get(null, function(settings) {
     settings = Object.assign(defaultSettings, settings);
 
+
     var template = document.createElement('template');
     var settingsTemplate = document.createElement('template');
 
@@ -25,7 +27,7 @@ function renderUI() {
     var view = `<a class="virLink" ` + (settings.newTab ? 'target="_blank"' : '') + `>
         <span>View Image</span>
       </a>`;
-    var copy = `<a class="virCopyImage" ><span>Copy Image</span></a>`;
+    var copy = settings.copySupported ? `<a class="virCopyImage" ><span>Copy Image</span></a>` : '';
     var save = `<a class="virSaveImage" ><span>Download</span></a>`;
     var primary = '';
     var sec1 = '';
@@ -205,8 +207,8 @@ function SettingsOpen() {
                 <input type="radio" id="virPrimaryView" name="primary" value="view" ` + (settings.primary == "view" ? "checked" : "") + `>
                 <label for="virPrimaryView">View Image</label><br>
 
-                <input type="radio" id="virPrimaryCopy" name="primary" value="copy" ` + (settings.primary == "copy" ? "checked" : "") + `>
-                <label for="virPrimaryCopy">Copy Image</label><br>
+                ` + (settings.copySupported ? `<input type="radio" id="virPrimaryCopy" name="primary" value="copy" ` + (settings.primary == "copy" ? "checked" : "") + `>
+                <label for="virPrimaryCopy">Copy Image</label><br>` : '') + `
 
                 <input type="radio" id="virPrimarySave" name="primary" value="save" ` + (settings.primary == "save" ? "checked" : "") + `>
                 <label for="virPrimarySave">Download Image</label>
