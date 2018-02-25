@@ -158,7 +158,7 @@ function renderUI() {
       <a class="_ZR" href="#">All Sizes</a>
     </span>
     <span class="_r3 customImageSearch">
-      <a class="_ZR">Seach by Image</a>
+      <a class="_ZR">Search by Image</a>
     </span>`;
 
     var searchImg = template.content.childNodes;
