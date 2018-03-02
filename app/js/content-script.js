@@ -104,7 +104,7 @@ function renderUI() {
 
 
     // Dropdown
-    document.querySelectorAll('.virDropDown').forEach(x => x.addEventListener("click", function(e) {
+    document.querySelectorAll('.virDropdownClick').forEach(x => x.addEventListener("click", function(e) {
       e.preventDefault();
       document.querySelectorAll('#myDropdown').forEach(x => x.classList.toggle("show"));
 
