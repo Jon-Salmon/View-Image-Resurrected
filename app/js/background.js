@@ -39,8 +39,8 @@ chrome.runtime.onMessage.addListener(
             default:
               browser.notifications.create({
                 "type": "basic",
-                "title": "Copy Failed",
-                "message": "Copying " + x.type.split('/')[1] + " images are not supported. \nDownload or use the right click context menu."
+                "title": chrome.i18n.getMessage("copyFailed"),
+                "message": chrome.i18n.getMessage("copyFailedMsg", x.type.split('/')[1])
               });
               return;
           }

@@ -1,8 +1,7 @@
 {
-
-  "description": "Brings back the 'View Image' and 'Search by Image' options in google image search results, as well as adding copy and download options.",
+  "description": "__MSG_extensionDescription__",
   "manifest_version": 2,
-  "name": "View Image Resurrected",
+  "name": "__MSG_extensionName__",
   "version": "1.9.1",
   "permissions": [
     "webRequest",
@@ -22,6 +21,7 @@
     }
   },
 
+  "default_locale": "en",
   "background": {
     "scripts": ["js/background.js"]
   },

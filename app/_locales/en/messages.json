@@ -1,0 +1,126 @@
+{
+  "extensionName": {
+    "message": "View Image Resurrected",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Brings back the 'View Image' and 'Search by Image' options in google image search results, as well as adding copy and download options.",
+    "description": "Description of the extension."
+  },
+
+  "ViewImage": {
+    "message": "View Image",
+    "description": "View Image button on image results."
+  },
+
+  "copyImage": {
+    "message": "Copy Image",
+    "description": "Copy image button on image results (dropdown)"
+  },
+
+  "downloadImage": {
+    "message": "Download",
+    "description": "Download image button on image results (dropdown)"
+  },
+
+  "settings": {
+    "message": "Settings",
+    "description": "Text in settings button, if in dropdown."
+  },
+
+  "allSizes": {
+    "message": "All Sizes",
+    "description": "All Sizes link on image pages"
+  },
+
+  "searchByImage": {
+    "message": "Search by Image",
+    "description": "Search by Image link on image pages"
+  },
+
+  "copyFailed": {
+    "message": "Copy Failed",
+    "description": "Title of copy failure error popup."
+  },
+
+  "copyFailedMsg": {
+    "message": "Copying $TYPE$ images is not supported. \nDownload or use the right click context menu.",
+    "description": "Informs the user that the image type is unsupported for copying.",
+    "placeholders": {
+      "type" : {
+        "content" : "$1",
+        "example" : "png"
+      }
+    }
+  },
+
+
+
+
+  "settingsPrimary": {
+    "message": "Primary option",
+    "description": "Primary option header (settings page)"
+  },
+
+  "viewImageSetting": {
+    "message": "View Image",
+    "description": "View Image button on settings menu."
+  },
+
+  "copyImageSetting": {
+    "message": "Copy Image",
+    "description": "Copy image button on settings menu."
+  },
+
+  "downloadImageSetting": {
+    "message": "Download Image",
+    "description": "Download image button on settings menu."
+  },
+
+
+  "btnPlacement": {
+    "message": "Button Placement",
+    "description": "Button placement option header (settings page)"
+  },
+
+  "btnPlaceDefault": {
+    "message": "Recommended Default",
+    "description": "Default option for button placement (settings)."
+  },
+
+  "btnPlaceOrigional": {
+    "message": "Google's Original",
+    "description": "Origional option for button placement (settings)."
+  },
+
+
+
+
+  "settingBtnPlacement": {
+    "message": "Settings placement",
+    "description": "Settings button placement option header (settings page)"
+  },
+
+  "settingBtnSeperate": {
+    "message": "Seperate Button",
+    "description": "Default option for settings button placement (settings)."
+  },
+
+  "settingBtnDropdown": {
+    "message": "In Dropdown",
+    "description": "In dropdown option for settings button placement (settings)."
+  },
+
+
+
+  "settingsAdvHeader": {
+    "message": "Settings placement",
+    "description": "Advanced options header (settings page)"
+  },
+
+  "settingAdvNewTab": {
+    "message": "'View Image' opens in new tab",
+    "description": "Settings option for opening in new tabs."
+  }
+}

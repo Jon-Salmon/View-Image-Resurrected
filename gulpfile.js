@@ -4,7 +4,9 @@ var sass = require('gulp-sass');
 
 gulp.task('copy', function() {
   gulp.src('app/manifest.json')
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('build'));
+  gulp.src('app/_locales/**')
+    .pipe(gulp.dest('build/_locales'));
 });
 
 gulp.task('img', function() {
@@ -27,7 +29,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('app/manifest.json', ['copy']);
+  gulp.watch(['app/manifest.json', 'app/_locales/**'], ['copy']);
   gulp.watch('app/icons/*', ['img']);
   gulp.watch('app/js/*', ['js']);
   gulp.watch('app/css/*', ['css']);
