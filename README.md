@@ -10,4 +10,4 @@
   - https://addons.mozilla.org/en-US/firefox/addon/view-image-resurrected/
 
 ## Translations
-If you can contribute translation please create the relevant localisation file by editing the English [messages.json](app/_locales/en/messages.json) file and creating a pull request.
+If you can contribute a translation, please create the relevant localisation file by editing the English [messages.json](app/_locales/en/messages.json) file and creating a pull request.
