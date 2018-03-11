@@ -85,3 +85,16 @@ a.virDropDown {
 .show {
   display: block;
 }
+
+.virButtonSpan {
+  fill: currentColor;
+  height: 14px;
+  line-height: 14px;
+  width: 14px;
+
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+}

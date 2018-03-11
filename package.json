@@ -1,6 +1,6 @@
 {
   "name": "view-image-resurrected",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "![Icon](icons/icon-96.png)\r # View Image Resurrected",
   "main": "index.js",
   "scripts": {
