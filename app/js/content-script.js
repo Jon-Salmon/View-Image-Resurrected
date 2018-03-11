@@ -214,7 +214,7 @@ function SettingsOpen() {
                 <label for="virPrimaryCopy">` + chrome.i18n.getMessage("copyImageSetting") + `</label><br>` : '') + `
 
                 <input type="radio" id="virPrimarySave" name="primary" value="save" ` + (settings.primary == "save" ? "checked" : "") + `>
-                <label for="virPrimarySave">` + chrome.i18n.getMessage("copyImageSetting") + `</label>
+                <label for="virPrimarySave">` + chrome.i18n.getMessage("downloadImageSetting") + `</label>
               </div>
 
               <div class="settingItem">
