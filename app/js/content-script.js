@@ -61,7 +61,7 @@ function renderUI() {
         break;
     }
 
-    var pages = document.body.querySelectorAll("table._FKw.irc_but_r tbody tr");
+    var pages = document.body.querySelectorAll("table.irc_but_r tbody tr");
     template.innerHTML = `<td class="customOpenImage">
     <div class="customTopElement">
     ` + primary + `
