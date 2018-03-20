@@ -25,6 +25,7 @@
   word-wrap: normal;
   min-width: 96px;
 
+  &:active,
   &:hover {
     border: 1px solid #191919;
     box-shadow: 0 1px 0 rgba(255, 255, 255, .09), 1px 1px 0 rgba(255, 255, 255, .05), -1px -1px 0 rgba(0, 0, 0, .02), inset 1px 1px 0 rgba(255, 255, 255, .05);
@@ -36,9 +37,19 @@
     margin: 0 !important;
     border: 0 !important;
 
+    &:active,
     &:hover {
       box-shadow: unset !important;
       border: 0 !important;
+    }
+
+    &,
+    span,
+    svg {
+      &:active,
+      &:hover {
+        color: #aaa!important;
+      }
     }
   }
 }
@@ -96,5 +107,19 @@ a.virDropDown {
     display: block;
     width: inherit;
     height: inherit;
+  }
+}
+
+.virGrayLink {
+  color: #7d7d7d;
+
+  a {
+    text-decoration: none;
+
+    &:active,
+    &:hover {
+      color: #d6d6d6!important;
+      text-decoration: underline!important;
+    }
   }
 }

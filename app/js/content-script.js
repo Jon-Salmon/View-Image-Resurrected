@@ -153,11 +153,11 @@ function renderUI() {
 
 
     // Search by Image
-    var pages = document.body.querySelectorAll("div.irc_mmc .irc_hd ._r3");
-    template.innerHTML = `<span class="_r3 virAllSizes">
+    var pages = document.body.querySelectorAll("div.irc_mmc .irc_hd > span");
+    template.innerHTML = `<span class="virGrayLink virAllSizes"> -
       <a class="_ZR" href="#">` + chrome.i18n.getMessage("allSizes") + `</a>
     </span>
-    <span class="_r3 customImageSearch">
+    <span class="virGrayLink customImageSearch"> -
       <a class="_ZR">` + chrome.i18n.getMessage("searchByImage") + `</a>
     </span>`;
 
