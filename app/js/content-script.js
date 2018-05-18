@@ -8,7 +8,8 @@ var defaultSettings = {
   primary: "view",
   placement: "default",
   copySupported: false,
-  settingPlacement: "seperate"
+  settingPlacement: "seperate",
+  hideShare: false
 }
 
 // Renderers
@@ -181,6 +182,12 @@ function renderUI() {
       }
     }));
 
+    // share dialog
+    if (settings.hideShare) {
+      // document.querySelectorAll('.i17628').forEach(x => x.parentNode.removeChild(x));
+      document.querySelectorAll('.i17628').forEach(x => x.parentNode.classList.add('virHide'));
+    }
+
     updateLinks(lastUrl);
   });
 }
@@ -237,7 +244,8 @@ function SettingsOpen() {
 
               <div class="settingItem">
                 <h3>` + chrome.i18n.getMessage("settingsAdvHeader") + `</h3>
-                <input id="cSettingsNewTab" name="newTab" type="checkbox" ` + (settings.newTab ? 'checked' : '') + `>` + chrome.i18n.getMessage("settingAdvNewTab") + `</input>
+                <input id="cSettingsNewTab" name="newTab" type="checkbox" ` + (settings.newTab ? 'checked' : '') + `>` + chrome.i18n.getMessage("settingAdvNewTab") + `</input><br>
+                <input id="virHideShare" name="hideShare" type="checkbox" ` + (settings.hideShare ? 'checked' : '') + `>` + chrome.i18n.getMessage("settingAdvHideShare") + `</input>
               </div>
 
             </div>
@@ -322,6 +330,7 @@ function refreshUI() {
   document.querySelectorAll('.customSettingsBtn').forEach(x => x.parentNode.removeChild(x));
   document.querySelectorAll('.customImageSearch').forEach(x => x.parentNode.removeChild(x));
   document.querySelectorAll('.virAllSizes').forEach(x => x.parentNode.removeChild(x));
+  document.querySelectorAll('.i17628').forEach(x => x.parentNode.classList.remove('virHide'));
   renderUI();
 }
 

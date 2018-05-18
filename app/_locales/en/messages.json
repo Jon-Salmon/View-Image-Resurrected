@@ -122,5 +122,10 @@
   "settingAdvNewTab": {
     "message": "'View Image' opens in new tab",
     "description": "Settings option for opening in new tabs."
+  },
+
+  "settingAdvHideShare": {
+    "message": "Hide 'Share' button",
+    "description": "Settings option for hiding google's default 'Share' button."
   }
 }
