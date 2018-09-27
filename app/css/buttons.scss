@@ -58,11 +58,12 @@ a.virDropDown {
   padding: 5px 4px 5px 0 !important;
 }
 /* Dropdown Content (Hidden by Default) */
+
 .dropdown-content {
   display: none;
   position: absolute;
   min-width: 160px;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   min-width: 0;
   margin: 0 1px;
@@ -93,6 +94,7 @@ a.virDropDown {
   }
 }
 /* Change color of dropdown links on hover */
+
 .show {
   display: block;
 }
